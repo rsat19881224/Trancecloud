@@ -1,0 +1,36 @@
+table.table.table-striped
+  tbody
+    tr
+      th = DeliveryDetail.human_attribute_name(:sheet_type)
+      th = DeliveryDetail.human_attribute_name(:transport_id)
+      th = DeliveryDetail.human_attribute_name(:ship_hotel_id)
+      th = DeliveryDetail.human_attribute_name(:arrival_hotel_id)
+      th = DeliveryDetail.human_attribute_name(:cargo_hotel_id)
+      th = DeliveryDetail.human_attribute_name(:created_at)
+      th 
+      th 
+      th 
+      th
+
+    - @details.each do |detail|
+      tr 
+        td(width='10%') = DeliveryDetail.human_attribute_name(detail.sheet_type)
+        td(width='14%') = Transport.find_by_id(detail.transport_id).try(:name)
+        td(width='14%') = Hotel.find_by_id(detail.ship_hotel_id).try(:name)
+        td(width='14%') = Hotel.find_by_id(detail.arrival_hotel_id).try(:name)
+        td(width='14%') = Hotel.find_by_id(detail.cargo_hotel_id).try(:name)
+        td(width='15%') = detail.created_at.to_s(:published_on)
+        - if detail.sheet_type == 'charter'
+          td(width='5%') = link_to '修正', edit_delivery_delivery_detail_path(@delivery,detail)
+          td(width='5%') = link_to '削除',delivery_delivery_detail_path(@delivery,detail), :method => :delete
+          td(width='9%') = link_to content_tag(:i, 'PDF表示', class: 'fa fa-file-pdf-o'), delivery_delivery_detail_path(@delivery,detail), class: "btn btn-default"
+          //td(width='9%') = link_to content_tag(:i, 'PDF表示', class: 'fa fa-file-pdf-o'), delivery_delivery_detail_path(@delivery,detail,format: 'pdf'), class: "btn btn-default"
+        - else 
+          td(width='5%') = link_to '修正', delivery_edit_del_path(@delivery,detail)
+          td(width='5%') = link_to '削除',delivery_delivery_detail_path(@delivery,detail), :method => :delete
+          td(width='9%') = link_to content_tag(:i, 'PDF表示', class: 'fa fa-file-pdf-o'), delivery_show_del_path(@delivery,detail), class: "btn btn-default"
+          //td(width='9%') = link_to content_tag(:i, 'PDF表示', class: 'fa fa-file-pdf-o'), delivery_show_del_path(@delivery,detail), class: "btn btn-default"
+        
+div align="right"
+  = link_to content_tag(:i, 'チャーター依頼書(往路)', class: 'fa fa-suitcase'), new_delivery_delivery_detail_path(@delivery,sheet_type: 'charter'), class: "btn btn-default"
+  = link_to content_tag(:i, '宅配便依頼書(復路)', class: 'fa fa-cubes'), new_delivery_delivery_detail_path(@delivery,sheet_type: 'delivery'), class: "btn btn-default"

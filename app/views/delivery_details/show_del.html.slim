@@ -1,0 +1,222 @@
+.panel.panel-default
+  .panel-heading
+    h4
+      = content_tag(:i, '宅配便依頼書(復路)', class: 'fa fa-cubes')
+  .panel-body
+    .row
+      table.gridtable
+        tbody
+          tr
+            td width='15%'
+            td width='10%'
+            td width='10%'
+            td width='10%'
+            td width='20%'
+            td width='10%'
+            td width='10%'
+            td width='20%'
+            
+          tr
+            td colspan="2" align="center"
+              = Transport.find_by_id(@detail.transport_id).try(:name)
+            td
+              =t('御中')
+
+          tr
+            td colspan="8" align="center"
+              h4
+                =t('宅配便お申込書(復路)')
+
+          tr
+            td colspan="2"
+              =t('旅行手配物宅配')
+
+          - partnerobj = Partner.find_by_id(Delivery.find_by_id(@detail.delivery_id).try(:partner_id))
+          tr
+            td colspan="5"
+            td
+              =t('送付元')
+            td colspan="2"
+              = partnerobj.try(:name)
+          tr
+            td colspan="5"
+            td
+              = t('担当者')
+            td colspan="2"
+              = partnerobj.try(:charge_name)
+          tr
+            td colspan="5"
+            td
+              =t('TEL')
+            td colspan="2"
+              = partnerobj.try(:tel)
+          tr
+            td colspan="5"
+            td
+              =t('Fax')
+            td colspan="2"
+              = partnerobj.try(:Fax)
+
+          tr
+            td.border align="center"
+              = t('発信日')
+            td.border colspan="7"
+              = Date.today.to_s
+
+
+          - schoolobj = School.find_by_id(Delivery.find_by_id(@detail.delivery_id).try(:school_id))
+          tr
+            td.border rowspan="3" align="center"
+              = t('団体名')
+            td.border rowspan="2" align="center"
+              = t('学校名')
+            td.border colspan="3" rowspan="2"
+              = schoolobj.try(:name)
+            td.border rowspan="2" align="center"
+              = t('合計')
+            td.border align="center"
+              = t('生徒(名)')
+            td.border
+              = @detail.students
+          tr
+            td.border align="center"
+              = t('先生(名)')
+            td.border
+              = @detail.teachers
+          tr
+            td.border align="center"
+              = t('住所')
+            td.border colspan="3"
+              = schoolobj.try(:adress1)
+            td.border align="center"
+              = t('TEL')
+            td.border colspan="2"
+              = schoolobj.try(:tel)
+
+          - cargohotelobj = Hotel.find_by_id(@detail.cargo_hotel_id)
+          tr
+            td.border rowspan="2" align="center"
+              = t('集荷元')
+            td.border align="center"
+              = t('施設名')
+            td.border colspan="3"
+              = cargohotelobj.try(:name)
+            td.border align="center"
+              = t('TEL')
+            td.border colspan="2"
+              = cargohotelobj.try(:tel)
+          tr
+            td.border align="center"
+              = t('住所')
+            td.border colspan="6"
+              = cargohotelobj.try(:adress1)
+
+          tr
+            td.border rowspan="5" align="center"
+              = t('集荷日時')
+            td.border colspan="3" rowspan="3" 
+              = @detail.cargo_datetime
+            td.border
+              = t('ダンボールL(50x40x30cm)')
+            td.border colspan="3"
+              = @detail.cardboard_no
+          tr
+            td.border
+              = t('ビニールカバー')
+            td.border colspan="3"
+              = @detail.vinyl_no
+          tr
+            td.border
+              = t('伝票　元払い')
+            td.border colspan="3"
+              = @detail.payment_no
+          
+          - cargotimefrom = ""
+          - cargotimeto = ""
+          - if @detail.cargo_time_from.present?
+            - cargotimefrom << @detail.cargo_time_from.strftime("%H:%M")          
+          - if @detail.cargo_time_to.present?
+            - cargotimeto << @detail.cargo_time_to.strftime("%H:%M")
+
+          tr
+            td.border colspan="3" rowspan="2" 
+              = cargotimefrom << " 〜 " << cargotimeto
+
+            td.border 
+              = t('伝票　着払い')
+            td.border colspan="3"
+              = @detail.cash_on_no
+          tr
+            td.border 
+              = t('資材搬入時間(迄)')
+            td.border colspan="3"
+              - if @detail.bringon_time.present?
+                = @detail.bringon_time.strftime("%H:%M")
+          tr
+            td.border rowspan="4" align="center"
+              = t('集荷内容')
+            td.border align="center"
+              = t('受付内容')
+            td.border align="center" colspan="2"
+              = t('チェック')
+            td.border colspan="4" align="center"
+              = t('支払方法')
+          tr
+            td.border rowspan="2" align="center"
+              = t('希望制')
+            td.border colspan="2" align="center"
+              = if @detail.payment_price_used then '○' 
+            td.border
+              = t('現地元払い個人　＠')
+            td.border colspan="3"
+              = @detail.payment_price
+          tr
+            td.border colspan="2" align="center"
+              = if @detail.cash_on_price_used then '○' 
+            td.border
+              = t('自宅着払い個人　＠')
+            td.border colspan="3"
+              = @detail.cash_on_price
+          tr
+            td.border align="center"
+              = t('全員出荷')
+            td.border colspan="2" align="center"
+              = if @detail.all_used then '○' 
+            td.border
+              = t('後日一括払い')
+            td.border colspan="3"
+
+          tr
+            td.border  align="center"
+              = t('備考')
+            td.border colspan="7"
+              = @detail.remark
+
+          -  travelobj = Travel.find_by_id(Delivery.find_by_id(@detail.delivery_id).try(:travel_id))
+          tr
+            td.border  align="center"
+              = t('旅行代理店')
+            td.border colspan="2"
+              = travelobj.try(:name)
+            td.border  align="center"
+              = t('支店')
+            td.border 
+              = travelobj.try(:office)
+            td.border align="center"
+              = t('TEL')
+            td.border colspan="2"
+              = travelobj.try(:tel)
+          tr
+            td.border align="center"
+              = t('代理店担当者')
+            td.border colspan="2"
+              = @detail.travel_staff
+            td.border align="center"
+              = t('担当者携帯')
+            td.border 
+              = @detail.travel_staff_tel
+            td.border align="center"
+              = t('FAX')
+            td.border colspan="2"
+              = travelobj.try(:Fax)
+       

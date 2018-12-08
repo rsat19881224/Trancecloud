@@ -1,0 +1,24 @@
+= page_entries_info(@deliveries)
+table.table.table-striped
+  tbody
+    tr
+      th = Delivery.human_attribute_name(:cargo_date)
+      th = Delivery.human_attribute_name(:travel_id)
+      th = Delivery.human_attribute_name(:school_id)
+      th = Delivery.human_attribute_name(:partner_id)
+      th = Delivery.human_attribute_name(:entry_date)
+      th 
+      th 
+      th 
+
+    - @deliveries.each do |delivery|
+      tr class=('deleted' if delivery.deleted?)
+        td(width='14%') = delivery.cargo_date
+        td(width='17%') = Travel.find_by_id(delivery.travel_id).try(:name)
+        td(width='17%') = School.find_by_id(delivery.school_id).try(:name)
+        td(width='17%') = Partner.find_by_id(delivery.partner_id).try(:name)
+        td(width='14%') = delivery.entry_date
+        td(width='5%') = link_to '修正', edit_delivery_path(delivery)
+        td(width='5%') = link_to '削除', delivery, data: {:confirm => '削除しますか?'}, :method => :delete
+        td(width='9%') = link_to '依頼書作成', delivery, class: "btn btn-default"
+= paginate @deliveries, remote: true

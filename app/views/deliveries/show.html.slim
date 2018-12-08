@@ -1,0 +1,48 @@
+.panel.panel-default
+  .panel-heading
+    h4
+      = content_tag(:i, '依頼書作成', class: 'fa fa-clipboard')
+  .panel-body
+
+    = form_for @delivery do |f|
+      
+      div align="right"
+        = link_to content_tag(:i, '前のページに戻る', class: 'fa fa-reply-all'), :back
+      br
+      .form-horizontal
+        .form-group
+          = f.label :cargo_date, class: 'col-xs-3 control-label'
+          .col-xs-3
+            = f.label "#{@delivery.cargo_date}", class: "form-control"
+
+        .form-group
+          = f.label :travel_id, class: 'col-xs-3 control-label'
+          .col-xs-3
+            = f.label @delivery.travel_id, class: "form-control"
+          .col-xs-3
+            - travelname = Travel.find_by_id(@delivery.travel_id).try(:name)
+            = text_field :travel_id,:travel_name, autofocus: false, readonly: true,class: "form-control nameval", value: "#{travelname}"
+
+        .form-group
+          = f.label :school_id, class: 'col-xs-3 control-label'
+          .col-xs-3
+            = f.label @delivery.school_id, class: "form-control"
+          .col-xs-3
+            - schoolname = School.find_by_id(@delivery.school_id).try(:name)
+            = text_field :school_id,:school_name, autofocus: false, readonly: true,class: "form-control nameval", value: "#{schoolname}"
+           
+        .form-group
+          = f.label :partner_id, class: 'col-xs-3 control-label'
+          .col-xs-3
+            = f.label @delivery.partner_id, class: "form-control"
+          .col-xs-3
+            - partnername = Partner.find_by_id(@delivery.partner_id).try(:name)
+            = text_field :partner_id,:partner_name, autofocus: false, readonly: true,class: "form-control nameval", value: "#{partnername}"
+           
+        .form-group
+          = f.label :entry_date, class: 'col-xs-3 control-label'
+          .col-xs-3
+            = f.label @delivery.entry_date, class: "form-control"
+
+    == render 'delivery_details/list'
+

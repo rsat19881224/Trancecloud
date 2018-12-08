@@ -1,0 +1,194 @@
+.panel.panel-default
+  .panel-heading
+    h4
+      = content_tag(:i, 'チャーター依頼書(往路)', class: 'fa fa-suitcase')
+  .panel-body
+    .row
+      table
+        tbody
+          tr
+            td width='15%'
+            td width='10%'
+            td width='10%'
+            td width='10%'
+            td width='20%'
+            td width='10%'
+            td width='10%'
+            td width='20%'
+
+          tr
+            td colspan="2" align="center"
+              = Transport.find_by_id(@detail.transport_id).try(:name)
+            td
+              =t('御中')
+
+          tr
+            td colspan="8" align="center"
+              h4
+                =t('チャーター依頼書(往路)')
+          
+          - partnerobj = Partner.find_by_id(Delivery.find_by_id(@detail.delivery_id).try(:partner_id))
+          tr
+            td colspan="5"
+            td
+              =t('送付先')
+            td colspan="2"
+              = partnerobj.try(:name)
+          tr
+            td colspan="5"
+            td
+              = t('担当者')
+            td colspan="2"
+              = partnerobj.try(:charge_name)
+          tr
+            td colspan="5"
+            td
+              =t('TEL')
+            td colspan="2"
+              = partnerobj.try(:tel)
+          tr
+            td colspan="5"
+            td
+              =t('Fax')
+            td colspan="2"
+              = partnerobj.try(:Fax)
+
+          tr
+            td.border align="center"
+              = t('発信日')
+            td.border colspan="7"
+              = Date.today.to_s
+
+          tr
+            td.border rowspan="2" align="center"
+              = t('出荷日')
+            td.border colspan="2" rowspan="2"
+              = @detail.ship_date
+            td.border rowspan="2" align="center"
+              = t('集荷日')
+            td.border rowspan="2"
+              = @detail.cargo_date
+            td.border align="center"
+              = t('生徒(名)')
+            td.border colspan="2"
+              = @detail.students
+          tr
+            td.border align="center"
+              = t('先生(名)')
+            td.border colspan="2"
+              = @detail.teachers
+          
+          - schoolobj = School.find_by_id(Delivery.find_by_id(@detail.delivery_id).try(:school_id))
+          tr
+            td.border rowspan="2" align="center"
+              = t('団体名')
+            td.border align="center"
+              = t('学校名')
+            td.border colspan="3"
+              = schoolobj.try(:name)
+            td.border align="center"
+              = t('担任名')
+            td.border colspan="2"
+              = schoolobj.try(:charge_name)
+          tr
+            td.border align="center"
+              = t('住所')
+            td.border colspan="3" 
+              = schoolobj.try(:adress1)
+            td.border align="center"
+              = t('TEL')
+            td.border colspan="2"
+              = schoolobj.try(:tel)
+
+          - shiphotelobj = Hotel.find_by_id(@detail.ship_hotel_id)
+          tr
+            td.border rowspan="3" align="center"
+              = t('発送元')
+            td.border align="center"
+              = t('施設名')
+            td.border colspan="3"
+              = shiphotelobj.try(:name)
+            td.border align="center"
+              = t('集荷日')
+            td.border colspan="2"
+              = @detail.cargo_datetime
+          tr
+            td.border  rowspan="2" align="center"
+              = t('住所')
+            td.border colspan="3" rowspan="2"
+              = shiphotelobj.try(:adress1)
+            td.border align="center"
+              = t('時刻')
+            td.border colspan="2"
+              - if @detail.cargo_time_from.present?
+                = @detail.cargo_time_from.strftime("%H:%M")
+
+          tr
+            td.border align="center"
+              = t('TEL')
+            td.border colspan="2"
+              = shiphotelobj.try(:tel)
+          
+          - arrivalhotelobj = Hotel.find_by_id(@detail.arrival_hotel_id)
+          tr
+            td.border rowspan="3" align="center"
+              = t('到着先')
+            td.border align="center"
+              = t('施設名')
+            td.border colspan="3"
+              = arrivalhotelobj.try(:name)
+            td.border align="center"
+              = t('到着日')
+            td.border colspan="2"
+              = @detail.arrival_datetime
+
+          tr
+            td.border  rowspan="2" align="center"
+              = t('住所')
+            td.border rowspan="2" colspan="3"
+              = arrivalhotelobj.try(:adress1)
+            td.border align="center"
+              = t('時刻')
+            td.border colspan="2"
+              - if @detail.arrival_time.present?
+                = @detail.arrival_time.strftime("%H:%M")
+
+          tr
+            td.border align="center"
+              = t('TEL')
+            td.border colspan="2"
+              = arrivalhotelobj.try(:tel)
+
+          tr
+            td.border align="center"
+              = t('備考')
+            td.border colspan="7"
+              = @detail.remark
+          
+          -  travelobj = Travel.find_by_id(Delivery.find_by_id(@detail.delivery_id).try(:travel_id))
+          tr
+            td.border  align="center"
+              = t('旅行代理店')
+            td.border colspan="2"
+              = travelobj.try(:name)
+            td.border  align="center"
+              = t('支店')
+            td.border 
+              = travelobj.try(:office)
+            td.border align="center"
+              = t('TEL')
+            td.border colspan="2"
+              = travelobj.try(:tel)
+          tr
+            td.border align="center"
+              = t('代理店担当者')
+            td.border colspan="2"
+              = @detail.travel_staff
+            td.border align="center"
+              = t('担当者携帯')
+            td.border 
+              = @detail.travel_staff_tel
+            td.border align="center"
+              = t('FAX')
+            td.border colspan="2"
+              = travelobj.try(:Fax)

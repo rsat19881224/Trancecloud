@@ -1,0 +1,19 @@
+h1 Welcome
+
+table.table.table-striped
+  tbody
+    tr
+      th = Delivery.human_attribute_name(:cargo_date)
+      th = Delivery.human_attribute_name(:travel_id)
+      th = Delivery.human_attribute_name(:school_id)
+      th = Delivery.human_attribute_name(:partner_id)
+      th = Delivery.human_attribute_name(:entry_date)
+      th 
+      th 
+      th 
+
+
+
+br
+
+= link_to '配送新規登録', new_delivery_path

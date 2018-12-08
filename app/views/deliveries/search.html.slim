@@ -1,0 +1,68 @@
+.panel.panel-default
+  .panel-heading
+    h4
+      = content_tag(:i, '配送検索', class: 'fa fa-search')
+
+  .panel-body
+	= search_form_for @q, url: "search" do |f|
+	  .form-horizontal
+		  .form-group
+		    = f.label :cargo_date, class: 'col-xs-3 control-label'
+		    .col-xs-3
+		      = f.text_field :cargo_date_gteq, autofocus: true, class: "form-control input-sm datepicker", placeholder: "From"
+		    .col-xs-3
+		      = f.text_field :cargo_date_lteq, autofocus: true, class: "form-control input-sm datepicker", placeholder: "To"
+		   
+		  .form-group
+		    = f.label :travel_id, class: 'col-xs-3 control-label'
+		    .col-xs-3
+		      = f.text_field :travel_id_eq, autofocus: true, class: "form-control input-sm"
+	        .col-xs-3
+	          = text_field :travel_id,:travel_name, autofocus: false, readonly: true,class: "form-control nameval"
+	        .col-xs-3
+	          button class="btn btn-primary" data-toggle="modal" data-target="#travelmodal"
+	            =t('旅行代理店検索')
+
+		  .form-group
+		    = f.label :school_id, class: 'col-xs-3 control-label'
+		    .col-xs-3
+		      = f.text_field :school_id_eq, autofocus: true, class: "form-control input-sm"
+		    .col-xs-3
+			  = text_field :school_id,:school_name, autofocus: false, readonly: true,class: "form-control nameval"
+			.col-xs-3
+			  button class="btn btn-primary" data-toggle="modal" data-target="#schoolmodal"
+			    =t('学　校　検　索')
+
+		  .form-group
+		    = f.label :partner_id, class: 'col-xs-3 control-label'
+		    .col-xs-3
+		      = f.text_field :partner_id_eq, autofocus: true, class: "form-control input-sm"
+	        .col-xs-3
+	          = text_field :partner_id,:partner_name, autofocus: false, readonly: true,class: "form-control nameval"
+	        .col-xs-3
+	          button class="btn btn-primary" data-toggle="modal" data-target="#partnermodal"
+	            =t('企　業　検　索')
+
+		  .form-group
+		    = f.label :entry_date, class: 'col-xs-3 control-label'
+		    .col-xs-3
+		      = f.text_field :entry_date_gteq, autofocus: true, class: "form-control input-sm datepicker", placeholder: "From"
+		    .col-xs-3
+		      = f.text_field :entry_date_lteq, autofocus: true, class: "form-control input-sm datepicker", placeholder: "To"
+
+	      .form-group
+	        .col-xs-3
+	        .col-xs-3
+	        .col-xs-3
+	        .col-xs-3
+	          = f.submit '検　索', class: 'btn btn-primary'
+
+	#delivery_list
+	  == render 'list'
+    
+    div class='modal fade' id='travelmodal'  
+      = render partial: 'shared/travels/search_form'
+    div class='modal fade' id='partnermodal'
+      = render partial: 'shared/partners/search_form'
+    div class='modal fade' id='schoolmodal'
+      = render partial: 'shared/schools/search_form'

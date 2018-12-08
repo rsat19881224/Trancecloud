@@ -1,0 +1,89 @@
+
+  = form_for @delivery do |f|
+    - if @delivery.errors.any?
+      div class="alert alert-block"
+       a class="close" data-dismiss="alert" 
+         = content_tag(:i, '', class: 'fa fa-times')
+       h4 lass="alert-heading"
+         = content_tag(:i, '下記を確認してください。', class: 'fa fa-exclamation-triangle')
+       ul
+          - @delivery.errors.full_messages.each do |message|
+            li = message
+
+    .form-horizontal      
+      - if !@delivery.new_record?
+        div align="right"
+          = link_to content_tag(:i, '前のページに戻る', class: 'fa fa-reply-all'), :back
+        br
+
+      .form-group
+        = f.label :cargo_date, class: 'col-xs-3 control-label'
+        .col-xs-3
+          = f.text_field :cargo_date, autofocus: true, class: "form-control datepicker"
+
+      .form-group
+        = f.label :travel_id, class: 'col-xs-3 control-label'
+        .col-xs-3
+          = f.text_field :travel_id, autofocus: true, class: "form-control"
+        .col-xs-3
+          - if @delivery.new_record?
+            = text_field :travel_id,:travel_name, autofocus: false, readonly: true,class: "form-control nameval"
+          - else
+            - travelname = Travel.find_by_id(@delivery.travel_id).try(:name)
+            = text_field :travel_id,:travel_name, autofocus: false, readonly: true,class: "form-control nameval", value: "#{travelname}"
+
+        .col-xs-3
+          button class="btn btn-primary" data-toggle="modal" data-target="#travelmodal"
+            =t('旅行代理店検索')
+
+      .form-group
+        = f.label :school_id, class: 'col-xs-3 control-label'
+        .col-xs-3
+          = f.text_field :school_id, autofocus: true, class: "form-control"
+        .col-xs-3
+          - if @delivery.new_record?
+            = text_field :school_id,:school_name, autofocus: false, readonly: true,class: "form-control nameval"
+          - else
+            - schoolname = School.find_by_id(@delivery.school_id).try(:name)
+            = text_field :school_id,:school_name, autofocus: false, readonly: true,class: "form-control nameval", value: "#{schoolname}"
+
+        .col-xs-3
+          button class="btn btn-primary" data-toggle="modal" data-target="#schoolmodal"
+            =t('学　校　検　索')
+
+      .form-group
+        = f.label :partner_id, class: 'col-xs-3 control-label'
+        .col-xs-3
+          = f.text_field :partner_id, autofocus: true, class: "form-control"
+        .col-xs-3
+          - if @delivery.new_record?
+            = text_field :partner_id,:partner_name, autofocus: false, readonly: true,class: "form-control nameval"
+          - else
+            - partnername = Partner.find_by_id(@delivery.partner_id).try(:name)
+            = text_field :partner_id,:partner_name, autofocus: false, readonly: true,class: "form-control nameval", value: "#{partnername}"
+        .col-xs-3
+          button class="btn btn-primary" data-toggle="modal" data-target="#partnermodal"
+            =t('企　業　検　索')
+
+      .form-group
+        = f.label :entry_date, class: 'col-xs-3 control-label'
+        .col-xs-3
+          = f.text_field :entry_date, autofocus: true, class: "form-control datepicker", value: "#{Date.today.to_s}"
+
+      .form-group
+        .col-xs-3
+        .col-xs-3
+        .col-xs-3
+        .col-xs-3
+          - if @delivery.new_record?
+            = f.submit '新規登録', class: 'btn btn-primary'
+          - else
+            = f.submit '修　正', class: 'btn btn-warning'
+
+      
+  div class='modal fade' id='travelmodal'
+    = render partial: 'shared/travels/search_form'
+  div class='modal fade' id='partnermodal'
+    = render partial: 'shared/partners/search_form'
+  div class='modal fade' id='schoolmodal'
+    = render partial: 'shared/schools/search_form'

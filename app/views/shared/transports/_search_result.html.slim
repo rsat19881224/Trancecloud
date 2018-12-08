@@ -1,0 +1,16 @@
+table.table.table-hover#transport_table
+  tbody
+    tr
+      th = Transport.human_attribute_name(:id)
+      th = Transport.human_attribute_name(:name)
+      th = Transport.human_attribute_name(:kana)
+      th 
+
+    - @transport_result.each do |transport|
+      tr(class="result")
+        td(width='50px') = transport.id
+        td(width='120px') = transport.name
+        td(width='120px') = transport.kana
+        td(width='20px')
+          button.btn.btn-success.btn-lg.transportselect value=transport.id,transport.name
+

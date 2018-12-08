@@ -1,0 +1,527 @@
+ja:
+  views:
+    pagination:
+      first: "先頭"
+      last: "最終"
+      previous: "&lsaquo;"
+      next: "&rsaquo;"
+      truncate: "..." 
+  helpers:
+    select:
+      prompt: 選択してください
+      include_blank: 選択してください
+    page_entries_info:
+      one_page:
+        zero: "<b>該当データがありません。</b>"
+        one: "<b>1件中 1-1 件を表示</b>"
+        display_entries: '%{entry_name}の1-%{count}件を表示中 / 合計%{count}件'
+      more_pages:
+        display_entries: '%{entry_name}の%{first}-%{last}件を表示中 / 合計%{total}件'
+  date:
+    abbr_day_names:
+    - 日
+    - 月
+    - 火
+    - 水
+    - 木
+    - 金
+    - 土
+    day_names:
+    - 日曜日
+    - 月曜日
+    - 火曜日
+    - 水曜日
+    - 木曜日
+    - 金曜日
+    - 土曜日
+    formats:
+      default: ! '%Y/%m/%d'
+      long: ! '%Y年%m月%d日(%a)'
+      short: ! '%m/%d'
+      by: ! '%Y年%m月%d日(%a)迄'
+      yearmonth: ! '%Y%m'
+      monthday: ! '%m%d'
+    month_names:
+    -
+    - 1月
+    - 2月
+    - 3月
+    - 4月
+    - 5月
+    - 6月
+    - 7月
+    - 8月
+    - 9月
+    - 10月
+    - 11月
+    - 12月
+    order:
+    - :year
+    - :month
+    - :day
+  datetime:
+    prompts:
+      year: 年
+      month: 月
+      day: 日
+      hour: 時
+      minute: 分
+      second: 秒
+  errors: &errors
+    format: ! '%{attribute}%{message}'
+    messages:
+      accepted: "%{attribute}を受諾してください。"
+      blank: "%{attribute}を入力してください。"
+      tel_blank: "%{attribute}を半角数字で入力してください。"
+      tel_invalid: "正しい%{attribute}を入力してください。"
+      present: "%{attribute}は入力しないでください。"
+      confirmation: "%{attribute}の入力が一致しません。"
+      empty: "%{attribute}を入力してください。"
+      not_select: "%{attribute}を選択してください。"
+      equal_to: "%{attribute}は%{count}にしてください。"
+      even: "%{attribute}は偶数にしてください。"
+      exclusion: "%{attribute}は予約されています。"
+      greater_than: "%{attribute}は%{count}より大きい値にしてください。"
+      greater_than_or_equal_to: "%{attribute}は%{count}以上の値にしてください。"
+      inclusion: "%{attribute}は一覧にありません。"
+      invalid: "%{attribute}は不正な値です。"
+      email_invalid: "%{attribute}が正しくありません。"
+      password_invalid: "%{attribute}は半角英数字8文字以上で入力してください。"
+      less_than: "%{attribute}は%{count}より小さい値にしてください。"
+      less_than_or_equal_to: "%{attribute}は%{count}以下の値にしてください。"
+      not_a_number: "%{attribute}は数値で入力してください。"
+      not_an_integer: "%{attribute}は整数で入力してください。"
+      odd: "%{attribute}は奇数にしてください。"
+      record_invalid: バリデーションに失敗しました。 %{errors}
+      restrict_dependent_destroy:
+        one: "%{record}が存在しているので削除出来ません。"
+        many: "%{record}が存在しているので削除出来ません。"
+        other:
+      taken: "この%{attribute}は既に使用されています。"
+      too_long: "%{attribute}は%{count}文字以内で入力してください。"
+      too_short: "%{attribute}は%{count}文字以上で入力してください。"
+      password_too_long: "%{attribute}は半角英数%{count}文字以内で入力してください。"
+      password_too_short: "%{attribute}は半角英数%{count}文字以上で入力してください。"
+      nickname_too_long: "%{attribute}は%{count}文字以内で入力してください。"
+      nickname_too_short: "%{attribute}は%{count}文字以上で入力してください。"
+      wrong_length: "%{attribute}は%{count}文字で入力してください。"
+      other_than: "%{attribute}は%{count}以外の値にしてください。"
+      start_at_uniqueness: "日付が重複しています。"
+      uniqueness: "%{attribute}が重複しています。"
+      greater_than_today_start_at: "%{attribute}は%{date}以降にしてください。"
+      incorrect: "%{attribute}が正しくありません。"
+      not_valid_datetime: "%{attribute}は日付の形式ではありません"
+      not_valid_email: "%{attribute}はメールアドレスの形式ではありません"
+      not_valid_kana: "%{attribute}は全角カナではありません"
+      not_valid_hiragana: "%{attribute}は平仮名ではありません"
+      not_valid_telephonenumber: "%{attribute}は電話番号の形式ではありません"
+      not_valid_mobilephonenumber: "%{attribute}は携帯電話番号の形式ではありません"
+    template:
+      body: 次の項目を確認してください。
+      header:
+        one: ! '%{model}にエラーが発生しました。'
+        other: ! '%{model}に%{count}個のエラーが発生しました。'
+  number:
+    currency:
+      format:
+        delimiter: ! ','
+        format: ! '%n%u'
+        precision: 0
+        separator: .
+        significant: false
+        strip_insignificant_zeros: false
+        unit: 円
+    format:
+      delimiter: ! ','
+      precision: 3
+      separator: .
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: ! '%n %u'
+        units:
+          billion: 十億
+          million: 百万
+          quadrillion: 千兆
+          thousand: 千
+          trillion: 兆
+          unit: ''
+      format:
+        delimiter: ''
+        precision: 3
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: ! '%n%u'
+        units:
+          byte: バイト
+          gb: ギガバイト
+          kb: キロバイト
+          mb: メガバイト
+          tb: テラバイト
+    percentage:
+      format:
+        delimiter: ''
+        format: "%n%"
+    precision:
+      format:
+        delimiter: ''
+  support:
+    array:
+      last_word_connector: と
+      two_words_connector: と
+      words_connector: と
+  time:
+    am: 午前
+    formats:
+      default: ! '%Y/%m/%d %H:%M:%S'
+      long: ! '%Y年%m月%d日(%a) %H時%M分%S秒 %z'
+      short: ! '%y/%m/%d %H:%M'
+      medium: ! '%Y-%m-%d %H:%M'
+      date: ! '%Y/%m/%d'
+      date_without_delimiter: ! '%Y%m%d'
+      year_week_without_delimiter: ! '%Y%W'
+      year_month_without_delimiter: ! '%Y%m'
+      year: ! '%Y'
+    pm: 午後
+
+  activemodel:
+    errors:
+      <<: *errors
+    attributes:
+      delivery:
+        cargo_date: 集荷日
+        travel_id: 旅行代理店id
+        school_id: 依頼団体(学校)id
+        partner_id: 送付元id
+        entry_date: 申込日
+  activerecord:
+    timestamps: &timestamps
+      created_at: 作成日
+      updated_at: 最終更新日
+      deleted_at: 削除日
+    errors:
+      <<: *errors
+    models:
+      user: ユーザ情報
+      admin: 管理者
+      school: 学校情報
+      company: 企業情報
+      transport: 運送会社
+      travel: 旅行代理店
+      partner: 契約企業
+      hotel: ホテル
+      role: 権限区分
+      bank: 銀行
+      branch: 銀行本支店
+      menu: メニュー
+      info: お知らせ情報
+      delivery: 配送登録
+      delivery_detail: 詳細登録
+
+    attributes:
+      user:
+        password: パスワード
+        remember_me: ログイン情報を保持する
+        email: ログイン用メールアドレス
+        encrypted_password: パスワード
+        reset_password_token: パスワードリセット用トークン
+        reset_password_sent_at: 
+        remember_created_at: 
+        sign_in_count: 
+        current_sign_in_at: 
+        last_sign_in_at: 
+        current_sign_in_ip: 
+        last_sign_in_ip: 
+        <<: *timestamps
+      school:
+        school_type: 学校区分
+        name: 学校名
+        kana: 学校名カナ
+        postal_code: 郵便番号
+        adress1: 住所1
+        adress2: 住所2
+        tel: 電話番号
+        fax: FAX番号
+        affiliated_post: 担当者部署
+        charge_name: 担当者名
+        email: E-mail
+      hotel:
+        name: ホテル名
+        kana: ホテル名カナ
+        postal_code: 郵便番号
+        office: 支店
+        adress1: 住所1
+        adress2: 住所2
+        tel: 電話番号
+        fax: FAX番号
+        affiliated_post: 担当者部署
+        charge_name: 担当者名
+        email: E-mail
+      company:
+        type: 会社分類
+        company_number: 法人番号
+        affiliated: グループ区分
+        group_number: グループ管理番号
+        demanded: 請求区分
+        name: 企業名
+        kana: カナ
+        office: 支店
+        postal_code: 郵便番号
+        adress1: 住所1
+        adress2: 住所2
+        tel: 電話番号
+        fax: FAX番号
+        affiliated_post: 担当者部署
+        charge_name: 担当者名
+        email: E-mail
+        remark: 備考
+        <<: *timestamps
+      travel:
+        type: 会社分類
+        company_number: 法人番号
+        affiliated: グループ区分
+        group_number: グループ管理番号
+        demanded: 請求区分
+        name: 旅行代理店名
+        kana: カナ
+        office: 支店
+        postal_code: 郵便番号
+        adress1: 住所1
+        adress2: 住所2
+        tel: 電話番号
+        fax: FAX番号
+        affiliated_post: 担当者部署
+        charge_name: 担当者名
+        email: E-mail
+        remark: 備考
+        <<: *timestamps
+      partner:
+        type: 会社分類
+        company_number: 法人番号
+        affiliated: グループ区分
+        group_number: グループ管理番号
+        demanded: 請求区分
+        name: 契約企業名
+        kana: カナ
+        office: 支店
+        postal_code: 郵便番号
+        adress1: 住所1
+        adress2: 住所2
+        tel: 電話番号
+        fax: FAX番号
+        affiliated_post: 担当者部署
+        charge_name: 担当者名
+        email: E-mail
+        remark: 備考
+        <<: *timestamps
+      transport:
+        type: 会社分類
+        company_number: 法人番号
+        affiliated: グループ区分
+        group_number: グループ管理番号
+        demanded: 請求区分
+        name: 運送会社名
+        kana: カナ
+        office: 支店
+        postal_code: 郵便番号
+        adress1: 住所1
+        adress2: 住所2
+        tel: 電話番号
+        fax: FAX番号
+        affiliated_post: 担当者部署
+        charge_name: 担当者名
+        email: E-mail
+        remark: 備考
+        <<: *timestamps
+      bank:
+        code: 銀行コード
+        name: 銀行名
+        kana: 銀行名カナ
+        <<: *timestamps
+      branch:
+        bank_id: 銀行ID
+        code: 支店コード
+        name: 支店名
+        kana: 支店名カナ
+        <<: *timestamps
+      menu_group:
+        code: メニューグループコード
+        name: メニューグループ
+        <<: *timestamps
+      menu:
+        code: メニューコード
+        name: メニュー名
+        product_category: 製品種別
+        manager_division: 管理者区分
+        approval_setting_used: 承認設定使用可否
+        extend_type: 拡張タイプ
+        <<: *timestamps
+      delivery:
+        cargo_date: 集荷日
+        travel_id: 旅行代理店
+        school_id: 依頼団体(学校)
+        partner_id: 送付元企業
+        entry_date: 申込日
+        <<: *timestamps
+      delivery_detail:
+        delivery_id: 配送元レコードID
+        sheet_type: 依頼書区分
+        ship_date: 出荷日
+        cargo_date: 集荷日
+        teachers: 先生人数
+        students: 生徒人数
+        travel_id: 旅行代理店
+        partner_id: 送付元企業
+        school_id: 依頼団体(学校)
+        ship_hotel_id: 発送元情報
+        arrival_hotel_id: 到着先情報
+        cargo_hotel_id: 集荷先情報
+        cargo_datetime: 集荷日
+        cardboard_no: ダンボール数
+        vinyl_no: ビニールカバー数
+        payment_no: 伝票元払い数
+        cash_on_no: 伝票着払い数
+        bringon_time: 資材搬入時間
+        payment_price: 現地元払い金額
+        cash_on_price: 現地着払い金額
+        all_used: 全員出荷
+        remark: 備考
+        transport_id: 運送会社
+        created_at: 登録日
+        partner_staff: 送付元担当者
+        charter: チャーター依頼書
+        delivery: 宅配便依頼書
+        arrival_datetime: 到着日
+        arrival_time: 到着時刻
+        cargo_time_from: 集荷時刻(開始)
+        cargo_time_to: 集荷時刻(終了)
+        payment_price_used: 現地元払いを利用する
+        cash_on_price_used: 自宅着払いを利用する
+        track_used: トラック
+        fly_used: 航空輸送
+        jr_used: JRコンテナ
+        post_used: 郵パック
+        felly_used: フェリー
+        travel_staff: 旅行代理店担当者
+        travel_staff_tel: 担当者携帯番号
+        <<: *timestamps
+  enumerize:
+    date_display_format:
+      japanese: 和暦
+      anno_domini: 西暦
+    prefecture:
+      hokkaido: 北海道
+      aomori: 青森県
+      iwate: 岩手県
+      miyagi: 宮城県
+      akita: 秋田県
+      yamagata: 山形県
+      fukushima: 福島県
+      ibaraki: 茨城県
+      tochigi: 栃木県
+      gunma: 群馬県
+      saitama: 埼玉県
+      chiba: 千葉県
+      tokyo: 東京都
+      kanagawa: 神奈川県
+      niigata: 新潟県
+      toyama: 富山県
+      ishikawa: 石川県
+      fukui: 福井県
+      yamanashi: 山梨県
+      nagano: 長野県
+      gifu: 岐阜県
+      shizuoka: 静岡県
+      aichi: 愛知県
+      mie: 三重県
+      shiga: 滋賀県
+      kyoto: 京都府
+      osaka: 大阪府
+      hyogo: 兵庫県
+      nara: 奈良県
+      wakayama: 和歌山県
+      tottori: 鳥取県
+      shimane: 島根県
+      okayama: 岡山県
+      hiroshima: 広島県
+      yamaguchi: 山口県
+      tokushima: 徳島県
+      kagawa: 香川県
+      ehime: 愛媛県
+      kochi: 高知県
+      fukuoka: 福岡県
+      saga: 佐賀県
+      nagasaki: 長崎県
+      kumamoto: 熊本県
+      oita: 大分県
+      miyazaki: 宮崎県
+      kagoshima: 鹿児島県
+      okinawa: 沖縄県
+
+    open_ended:
+      unlimited: 無制限
+      limit: 制限有
+
+    next_altered:
+      no_change: 変更無
+      change: 変更有
+
+    locked:
+      unlocked: ロックアウト無
+      locked: ロックアウト有
+
+    user:
+      type:
+        admin: 管理者
+        user: ユーザー
+
+  general:
+    list:
+      none: ー
+      with_or_without:
+        with: ○
+        with_out: ✕
+    label: &label
+      show: 参照
+      register: 登録
+      create: 新規作成
+      edit: 編集
+      update: 更新
+      detail: 詳細
+      delete: 削除
+      deleted: 削除済み
+      copy: コピー
+      download: ダウンロード
+      csv_download: CSVダウンロード
+      add: 追加
+      search: 検索
+      execute: "実行"
+      back: 戻る
+      close: 閉じる
+      import: インポート
+      select: 選択
+      cancel: キャンセル
+      bundle:
+        create: 一括作成
+        update: 一括編集
+        show: 参照
+    message:
+      confirm_delete: "削除してよろしいでしょうか？\n削除を行うとデータの復旧は行えません。"
+      confirm_proceed: "実行してよろしいですか？"
+    placeholder:
+      api_response_additional_data: "GETの場合は、URLに付与するパラメータを記入。POSTの場合は、サーバに送信するPOSTデータを記入"
+    misc:
+      year: "%{year}年"
+      month: "%{month}月"
+      day: "%{day}日"
+      count: "%{count}件目"
+      as: として
+      yen: 円
+      from: ～
+      pixel: px
+      omission: ・・・
+      # count: 回
+
+  title: "電債 クラウド"

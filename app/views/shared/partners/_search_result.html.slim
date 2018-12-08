@@ -1,0 +1,16 @@
+table.table.table-hover#partner_table
+  tbody
+    tr
+      th = School.human_attribute_name(:id)
+      th = School.human_attribute_name(:name)
+      th = School.human_attribute_name(:kana)
+      th 
+
+    - @partner_result.each do |partner|
+      tr(class="result")
+        td(width='50px') = partner.id
+        td(width='120px') = partner.name
+        td(width='120px') = partner.kana
+        td(width='20px')
+          button.btn.btn-success.btn-lg.partnerselect value=partner.id,partner.name
+

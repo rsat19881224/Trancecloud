@@ -1,0 +1,1 @@
+$('#hotel_table').html("<%= j(render partial: 'shared/hotels/search_result') %>")

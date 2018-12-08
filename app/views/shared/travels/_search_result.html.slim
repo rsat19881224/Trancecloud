@@ -1,0 +1,15 @@
+table.table.table-hover#travel_table(width='310px')
+  tbody
+    tr
+      th = Travel.human_attribute_name(:id)
+      th = Travel.human_attribute_name(:name)
+      th = Travel.human_attribute_name(:office)
+      th = t('選択')
+
+    - @travel_result.each do |travel|
+      tr(class="result")
+        td(width='50px') = travel.id
+        td(width='120px') = travel.name
+        td(width='120px') = travel.office
+        td(width='20px')
+          button.btn.btn-success.btn-lg.travelselect value=travel.id,travel.name

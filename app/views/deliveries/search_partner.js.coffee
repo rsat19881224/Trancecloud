@@ -1,0 +1,1 @@
+$('#partner_table').html("<%= j(render partial: 'shared/partners/search_result') %>")

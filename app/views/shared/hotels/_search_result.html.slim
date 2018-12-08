@@ -1,0 +1,17 @@
+table.table.table-hover#hotel_table
+  tbody
+    tr
+      th = Hotel.human_attribute_name(:id)
+      th = Hotel.human_attribute_name(:name)
+      th = Hotel.human_attribute_name(:kana)
+      th
+      
+
+    - @hotel_result.each do |hotel|
+      tr(class="result")
+        td(width='50px') = hotel.id
+        td(width='120px') = hotel.name
+        td(width='120px') = hotel.kana
+        td(width='20px')
+          button.btn.btn-success.btn-lg.hotelselect value=hotel.id,hotel.name
+

@@ -1,0 +1,16 @@
+table.table.table-hover#school_table
+  tbody
+    tr
+      th = School.human_attribute_name(:id)
+      th = School.human_attribute_name(:name)
+      th = School.human_attribute_name(:kana)
+      th 
+
+    - @school_result.each do |school|
+      tr(class="result")
+        td(width='50px') = school.id
+        td(width='120px') = school.name
+        td(width='120px') = school.kana
+        td(width='20px')
+          button.btn.btn-success.btn-lg.schoolselect value=school.id,school.name
+

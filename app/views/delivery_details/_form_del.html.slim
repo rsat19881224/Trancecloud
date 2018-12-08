@@ -1,0 +1,180 @@
+.panel.panel-default
+  .panel-heading
+    h4
+      = content_tag(:i, '宅配便依頼書(復路)', class: 'fa fa-cubes')
+  .panel-body
+    .row
+      .col-md-10
+        div class='box box-primary'
+          .box-body
+            = form_for @detail, :url => {:controller => :delivery_details, :action => :create, :sheet_type => @sheet_type} do |f|          
+              - if @detail.errors.any?
+                div class="alert alert-block"
+                 a class="close" data-dismiss="alert" 
+                   = content_tag(:i, '', class: 'fa fa-times')
+                 h4 lass="alert-heading"
+                   = content_tag(:i, '下記を確認してください。', class: 'fa fa-exclamation-triangle')
+                 ul
+                    - @detail.errors.full_messages.each do |message|
+                      li = message
+
+              div align="right"
+                = link_to content_tag(:i, '前のページに戻る', class: 'fa fa-reply-all'), :back
+              br
+              .form-horizontal
+                .form-group
+                  = f.label :transport_id, class: 'col-xs-3 control-label'
+                  .col-xs-3
+                    = f.text_field :transport_id, autofocus: true, class: "form-control"
+                  .col-xs-3
+                    - if @detail.new_record?
+                      = text_field :transport_id,:transport_name, autofocus: false, readonly: true,class: "form-control nameval"
+                    - else
+                      - transportname = Transport.find_by_id(@detail.transport_id).try(:name)
+                      = text_field :transport_id,:transport_name, autofocus: false, readonly: true,class: "form-control nameval", value: "#{transportname}"
+                  .col-xs-3
+                    button class="btn btn-primary" data-toggle="modal" data-target="#transportmodal"
+                      =t('運送会社検索')
+
+                .form-group
+                  = f.label :partner_id, class: 'col-xs-3 control-label'
+                  .col-xs-3
+                    = f.label Delivery.find(params[:delivery_id]).partner_id, autofocus: true, class: "form-control"
+                  .col-xs-3
+                    - partnername = Partner.find_by_id(Delivery.find(params[:delivery_id]).partner_id).try(:name)
+                    = text_field :partner_id,:partner_name, autofocus: false, readonly: true,class: "form-control nameval", value: "#{partnername}"
+
+                .form-group
+                  = f.label :partner_staff, class: 'col-xs-3 control-label'
+                  .col-xs-3
+                    = f.text_field :partner_staff, autofocus: true, class: "form-control"
+
+                .form-group
+                  = f.label :school_id, class: 'col-xs-3 control-label'
+                  .col-xs-3
+                    = f.label Delivery.find(params[:delivery_id]).school_id, autofocus: true, class: "form-control"
+                  .col-xs-3
+                    - schoolname = School.find_by_id(Delivery.find(params[:delivery_id]).school_id).try(:name)
+                    = text_field :school_id,:school_name, autofocus: false, readonly: true,class: "form-control nameval", value: "#{schoolname}"
+
+                .form-group
+                  = f.label :teachers, class: 'col-xs-3 control-label'
+                  .col-xs-3
+                    = f.text_field :teachers, autofocus: true, class: "form-control"
+
+                .form-group
+                  = f.label :students, class: 'col-xs-3 control-label'
+                  .col-xs-3
+                    = f.text_field :students, autofocus: true, class: "form-control"
+
+                .form-group
+                  = f.label :cargo_hotel_id, class: 'col-xs-3 control-label'
+                  .col-xs-3
+                    = f.text_field :cargo_hotel_id, autofocus: true, class: "form-control"
+                  .col-xs-3
+                    - if @detail.new_record?
+                      = text_field :cargo_hotel_id,:cargo_hotel_name, autofocus: false, readonly: true,class: "form-control nameval"
+                    - else
+                      - arrivalhotelname = Hotel.find_by_id(@detail.cargo_hotel_id).try(:name)
+                      = text_field :cargo_hotel_id,:cargo_hotel_name, autofocus: false, readonly: true,class: "form-control nameval", value: "#{arrivalhotelname}"       
+                    
+                  .col-xs-3
+                    button class="btn btn-primary" data-toggle="modal" data-target="#hotelmodal"
+                      =t('ホテル検索')
+
+                .form-group
+                  = f.label :cargo_datetime, class: 'col-xs-3 control-label'
+                  .col-xs-3
+                    = f.text_field :cargo_datetime, autofocus: true, class: "form-control datepicker"
+
+                .form-group
+                  = f.label :cargo_time_from, class: 'col-xs-3 control-label'
+                  .col-xs-3
+                    = f.text_field :cargo_time_from, autofocus: true, placeholder: "hh:mm", class: "form-control"
+
+                .form-group
+                  = f.label :cargo_time_to, class: 'col-xs-3 control-label'
+                  .col-xs-3
+                    = f.text_field :cargo_time_to, autofocus: true, placeholder: "hh:mm", class: "form-control"
+
+                .form-group
+                  = f.label :cardboard_no, class: 'col-xs-3 control-label'
+                  .col-xs-3
+                    = f.text_field :cardboard_no, autofocus: true, class: "form-control"
+                
+                .form-group
+                  = f.label :vinyl_no, class: 'col-xs-3 control-label'
+                  .col-xs-3
+                    = f.text_field :vinyl_no, autofocus: true, class: "form-control"
+
+                .form-group
+                  = f.label :payment_no, class: 'col-xs-3 control-label'
+                  .col-xs-3
+                    = f.text_field :payment_no, autofocus: true, class: "form-control"
+
+                .form-group
+                  = f.label :cash_on_no, class: 'col-xs-3 control-label'
+                  .col-xs-3
+                    = f.text_field :cash_on_no, autofocus: true, class: "form-control"
+
+                .form-group
+                  = f.label :bringon_time, class: 'col-xs-3 control-label'
+                  .col-xs-3
+                    = f.text_field :bringon_time, autofocus: true, placeholder: "hh:mm", class: "form-control"
+                
+                .form-group
+                  = f.label :payment_price, class: 'col-xs-3 control-label'
+                  .col-xs-3
+                    = f.text_field :payment_price, autofocus: true, class: "form-control"
+                
+                .form-group
+                  = f.label :payment_price_used, class: 'col-xs-3 control-label'
+                  .col-xs-3
+                    = f.check_box :payment_price_used, autofocus: true, class: "form-control"
+
+                .form-group
+                  = f.label :cash_on_price, class: 'col-xs-3 control-label'
+                  .col-xs-3
+                    = f.text_field :cash_on_price, autofocus: true, class: "form-control"
+
+                .form-group
+                  = f.label :cash_on_price_used, class: 'col-xs-3 control-label'
+                  .col-xs-3
+                    = f.check_box :cash_on_price_used, autofocus: true, class: "form-control"
+
+                .form-group
+                  = f.label :all_used, class: 'col-xs-3 control-label'
+                  .col-xs-3
+                    = f.check_box :all_used, autofocus: true, class: "form-control"
+
+                .form-group
+                  = f.label :remark, class: 'col-xs-3 control-label'
+                  .col-xs-9
+                    = f.text_area :remark, autofocus: true, class: "form-control", row: 5
+                
+                .form-group
+                  = f.label :travel_id, class: 'col-xs-3 control-label'
+                  .col-xs-3
+                    = f.label Delivery.find(params[:delivery_id]).travel_id, autofocus: true, class: "form-control"
+                  .col-xs-3
+                    - travelname = Travel.find_by_id(Delivery.find(params[:delivery_id]).travel_id).try(:name)
+                    = text_field :travel_id,:travel_name, autofocus: false, readonly: true,class: "form-control nameval", value: "#{travelname}"
+
+                .form-group
+                  = f.label :travel_staff, class: 'col-xs-3 control-label'
+                  .col-xs-3
+                    = f.text_field :travel_staff, autofocus: true, class: "form-control"     
+                                 
+                .form-group
+                  = f.label :travel_staff_tel, class: 'col-xs-3 control-label'
+                  .col-xs-3
+                    = f.text_field :travel_staff_tel, autofocus: true, placeholder: "090-0000-0000", class: "form-control" 
+
+              div align="right"
+                = f.submit '新規登録', class: 'btn btn-primary'
+              br
+
+            div class='modal fade' id='transportmodal'
+              = render partial: 'shared/transports/search_form'
+            div class='modal fade' id='hotelmodal'
+              = render partial: 'shared/hotels/search_form'
